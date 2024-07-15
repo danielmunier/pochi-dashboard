@@ -11,17 +11,17 @@ import { useParams } from "next/navigation";
 const routes = [
   {
     name: 'dashboard',
-    icon: <MdSpaceDashboard size={48} />,
+    icon: <MdSpaceDashboard size={28} />,
     getPath: (id: string) => `/dashboard/${id}`,
   },
   {
     name: 'commands',
-    icon: <BsTerminal size={48} />,
+    icon: <BsTerminal size={28} />,
     getPath: (id: string) => `/dashboard/${id}/commands`,
   },
   {
     name: 'settings',
-    icon: <FaWrench size={48} />,
+    icon: <FaWrench size={28} />,
     getPath: (id: string) => `/dashboard/${id}/settings`,
   },
 ];
@@ -31,7 +31,7 @@ export const Sidebar = () => {
 
   return (
     <div>
-      <div className="mb-4 p-4">
+      <div className="">
         <Image
           src="https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png"
           height={40}
@@ -44,9 +44,9 @@ export const Sidebar = () => {
       <div className="flex flex-col items-center space-y-8">
        {
         routes.map((route) => (
-          <div key={route.name} className="text-gray-400 hover:text-white transition duration-300 cursor-pointer">
-            <Link href={route.getPath(params.id as string)}>
-            {route.icon}
+          <div key={route.name} className="text-gray-400 p-4 hover:text-white transition duration-300 cursor-pointer w-full space-x-4">
+            <Link href={route.getPath(params.id as string)} className="flex flex-row space-x-4">
+            {route.icon} <span>{route.name}</span>
             </Link>
           </div>
         ))

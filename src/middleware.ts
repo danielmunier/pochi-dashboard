@@ -13,16 +13,18 @@ export const validateMiddlewareCookies = (req: NextRequest) => {
 
 export async function middleware(req: NextRequest, ev: NextFetchEvent) {
     const headers = validateMiddlewareCookies(req)
-    if (!headers) return new Response("Unauthorized", { status: 401 })
+    if (!headers) {
+        console.log("Não autorizado")
+        return new Response("Unauthorized", { status: 401 })
+    }
 
     const url = req.url;
     const parsedUrl = new URL(url);
     const id = parsedUrl.pathname.split('/')[2];
 
     const response = await fetchValidGuild(id, headers)
-    console.log(response.status)
 
-    // return response.status !== 200 ? NextResponse.redirect(new URL("/", req.url)) : NextResponse.next()
+     return response.status !== 200 ? NextResponse.next()  : NextResponse.redirect(new URL("/", req.url))
 
 }
 

@@ -2,20 +2,30 @@
 import axios from "axios";
 import { Guild } from "./types";
 import { validateCookies } from "./helper";
-import { redirect } from "next/navigation";
+import { FormData } from "@/app/dashboard/[id]/page";
+
+
+
+
 
 export const fetchMutualGuilds = async () => {
-  const headers = validateCookies();
-  if (!headers) {
-    return { guilds: [] }; // Retorna uma lista vazia se a validação dos cookies falhar
+  const headersObject = await validateCookies();
+
+
+
+  if (!headersObject) {
+    return { guilds: [] }; // Return an empty list if cookie validation fails
   }
 
+
+
+
   try {
-    const API_URL = "http://localhost:1500/api/";
-    const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, {
-      headers,
-    });
-    return { guilds };
+    const { data: guilds } = await axios.get(`${process.env.API_URL}/api/guilds/`, {
+      headers: headersObject,
+    })
+
+    return { guilds }
   } catch (e) {
     console.error(e);
     return { guilds: [] };
@@ -23,50 +33,85 @@ export const fetchMutualGuilds = async () => {
 };
 
 export const fetchValidGuild = async (id: string, headers: HeadersInit) => {
-  const API_URL = "http://localhost:1500/api";
-
-  const response = await fetch(`${API_URL}/guilds/${id}/permissions`, {
+  const response = await fetch(`${process.env.API_URL}/guilds/${id}/permissions`, {
     headers,
   });
   return response;
-}
+};
 
 export const fetchGuild = async (id: string): Promise<Guild | any> => {
-
-  try {
-    const headers = validateCookies();
-    if (!headers) {
-      return { redirect: { destination: "/" } }; // Retorna uma lista vazia se a validação dos cookies falhar
-    }
-
-    const API_URL = process.env.API_URL;
-
-    const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${id}`, {
-      headers
-    });
-
-
-    return { guild };
-  } catch (error) {
-    console.error(error)
-  }
-};
-
-
-export const fetchGuildChannels = async (id: string) => {
-  const API_URL = process.env.API_URL;
-  const headers = validateCookies();
+  const headers = await validateCookies();
   if (!headers) {
-    return { channels: [] }; // Retorna uma lista vazia se a validação dos cookies falhar
+    return { redirect: { destination: "/" } };
   }
 
   try {
-    const { data: channels } = await axios.get(`${API_URL}/guilds/${id}/channels`, {
+    const { data: guild } = await axios.get<Guild>(`${process.env.API_URL}/guilds/${id}`, {
       headers,
     });
-
-    return channels ;
+    return { guild };
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
+
+export const fetchGuildChannels = async (id: string) => {
+  const headers = await validateCookies();
+  if (!headers) {
+    return [];
+  }
+  try {
+    const { data: guilds } = await axios.get(`http://localhost:1500/api/guilds/${id}/channels`,
+      {
+        headers: headers
+      }
+
+    );
+
+
+    return guilds;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const fetchTicketConfig = async (id: string) => {
+  try {
+    const { data: ticketConfig } = await axios.get(`/api/tickets/${id}`)
+
+    return ticketConfig
+  } catch (error) {
+
+  }
+
+}
+
+export const fetchGuildConfig = async (id: string) => {
+
+  try {
+    const { data: guildDataConfig } = await axios.get(`/api/guilds/${id}/config`)
+
+    return guildDataConfig
+
+  } catch (error) {
+    console.log(error)
+    return {}
+  }
+
+}
+
+
+
+export const updateGuildConfig = async (formData: FormData) => {
+  try {
+    return axios.post(`/api/guilds/${formData.guildId}/config`, formData)
+   
+
+  } catch (error: any) {
+    console.log({error: error.message})
+    return {}
+
+  }
+}
