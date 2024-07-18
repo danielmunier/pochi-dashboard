@@ -12,10 +12,10 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
             headers: { authorization }
         });
 
-        return NextResponse.json(guildData);
+        return NextResponse.json(guildData, {status: 200});
     } catch (error: any) {
         console.log(error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return NextResponse.json({ error: "Error get guild" }, { status: 500 });
     }
 }
 
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
                 data
             });
 
-            return NextResponse.json(guildData);
+            return NextResponse.json(guildData, { status: 200 });
         }
 
         return NextResponse.json({ error: 'Invalid guild' }, { status: 400 });
