@@ -1,8 +1,7 @@
 "use client"
 import Image from "next/image";
 import { MdSpaceDashboard } from "react-icons/md";
-import { BsTerminal } from "react-icons/bs";
-import { FaWrench } from "react-icons/fa";
+import { FaWrench, FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -15,14 +14,14 @@ const routes = [
     getPath: (id: string) => `/dashboard/${id}`,
   },
   {
-    name: 'commands',
-    icon: <BsTerminal size={28} />,
-    getPath: (id: string) => `/dashboard/${id}/commands`,
-  },
-  {
     name: 'settings',
     icon: <FaWrench size={28} />,
     getPath: (id: string) => `/dashboard/${id}/settings`,
+  },
+  {
+    name: 'Voltar',
+    icon: <FaArrowLeft size={28} />,
+    getPath: (id: string) => `/menu`,
   },
 ];
 
@@ -30,14 +29,14 @@ export const Sidebar = () => {
   const params = useParams()
 
   return (
-    <div>
-      <div className="">
+    <div className="">
+      <div className="flex justify-center p-3">
         <Image
           src="https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png"
-          height={40}
-          width={40}
+          height={90}
+          width={90}
           alt="guild_avatar"
-          className="rounded-full"
+          className="rounded-full "
         />
       </div>
 

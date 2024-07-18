@@ -33,10 +33,17 @@ export const fetchMutualGuilds = async () => {
 };
 
 export const fetchValidGuild = async (id: string, headers: HeadersInit) => {
-  const response = await fetch(`${process.env.API_URL}/guilds/${id}/permissions`, {
-    headers,
-  });
-  return response;
+  try {
+    const response = await fetch(`${process.env.API_URL}/guilds/${id}/permissions`, {
+      headers,
+    });
+    return response;
+  } catch (error: any) {
+    console.log(error)
+    return {
+      status: error.message
+    }
+  }
 };
 
 export const fetchGuild = async (id: string): Promise<Guild | any> => {
@@ -62,7 +69,7 @@ export const fetchGuildChannels = async (id: string) => {
     return [];
   }
   try {
-    const { data: guilds } = await axios.get(`http://localhost:1500/api/guilds/${id}/channels`,
+    const { data: guilds } = await axios.get(`${process.env.API_URL}/api/guilds/${id}/channels`,
       {
         headers: headers
       }
@@ -107,11 +114,23 @@ export const fetchGuildConfig = async (id: string) => {
 export const updateGuildConfig = async (formData: FormData) => {
   try {
     return axios.post(`/api/guilds/${formData.guildId}/config`, formData)
-   
+
 
   } catch (error: any) {
-    console.log({error: error.message})
+    console.log({ error: error.message })
     return {}
 
+  }
+}
+
+
+export const getGuildRoles = async (id: string) => {
+  try {
+    const {data: roles} = await axios.get(`/api/guilds/${id}/roles`)
+    return roles
+    
+  } catch (error) {
+    console.log(error)
+    
   }
 }

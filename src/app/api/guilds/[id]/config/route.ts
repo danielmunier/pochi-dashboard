@@ -39,7 +39,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
             }
             )
 
-            return NextResponse.json(guildData)
+            return NextResponse.json({})
         }
 
         //return response.status !== 200 ? NextResponse.next() : NextResponse.redirect(new URL("/", req.url))

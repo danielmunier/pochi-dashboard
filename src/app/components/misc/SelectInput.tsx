@@ -1,32 +1,35 @@
-// components/SelectInput.tsx
-import React from "react";
+import React from 'react';
+import Select, { MultiValue, SingleValue } from 'react-select';
+
+interface Option {
+  value: string;
+  label: string;
+}
 
 interface SelectInputProps {
   name: string;
-  value: string | null;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  options: { id: string; name: string }[];
+  value: SingleValue<Option> | MultiValue<Option> | any;
+  onChange: (newValue: SingleValue<Option> | MultiValue<Option>, actionMeta: any) => void;
+  options: Option[];
   label: string;
-  disabledOptionText: string;
+  isMulti?: boolean;
 }
 
-const SelectInput: React.FC<SelectInputProps> = ({ name, value, onChange, options, label, disabledOptionText }) => {
+const SelectInput: React.FC<SelectInputProps> = ({ name, value, onChange, options, label, isMulti = false }) => {
   return (
-    <div>
-      <h3 className="text-xl font-semibold mb-4">{label}</h3>
-      <select
-        className="bg-gray-800 text-white rounded-lg p-2 mb-4"
+    <div className="mb-4">
+      <label htmlFor={name} className="block text-white mb-2">
+        {label}
+      </label>
+      <Select
         name={name}
-        value={value || ""}
+        value={value}
         onChange={onChange}
-      >
-        <option value="" disabled>{disabledOptionText}</option>
-        {options.map((option) => (
-          <option key={option.id} value={option.id}>
-            {option.name}
-          </option>
-        ))}
-      </select>
+        options={options}
+        isMulti={isMulti}
+        className="basic-multi-select text-black"
+        classNamePrefix="select"
+      />
     </div>
   );
 };

@@ -1,6 +1,14 @@
 // src/app/dashboard/DashboardLayout.tsx
 import { Sidebar } from "@/app/components/misc/Sidebar";
 import Header from "@/app/components/misc/Header";
+import React, { useContext } from "react";
+import { GuildContext } from "../context/GuildContext";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Pochi',
+}
+ 
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
@@ -8,7 +16,7 @@ type DashboardLayoutProps = {
   params: { id: string };
 };
 
-export default function DashboardLayout({ children, title }: DashboardLayoutProps) {
+export default function DashboardLayout({ children, title, params }: DashboardLayoutProps) {
  
   return (
     <div className="flex h-screen">
@@ -16,8 +24,8 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
         <Sidebar />
       </div>
 
-      <div className="flex-grow bg-gray-800">
-        {/* <Header title={title} /> */}
+      <div className="bg-gray-900 w-screen">
+        <Header title={title} />
         <div className="p-6 md:p-12 overflow-y-auto text-white">
           {children}
         </div>
