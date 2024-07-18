@@ -12,8 +12,8 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         })
 
         return NextResponse.json(guildData)
-    } catch (error: any) {
+    } catch (error) {
         console.log(error)
-        return NextResponse.json({error: error.message})
+        return NextResponse.json({error: "Erro GET channels"}, {status: 500})
     }
 }

@@ -11,9 +11,9 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
             headers: { authorization }
         })
 
-        return NextResponse.json(guildData)
-    } catch (error: any) {
+        return NextResponse.json(guildData, {status: 200})
+    } catch (error) {
         console.log(error)
-        return { error: error.message }
+        return NextResponse.json({error: "Error GET roles"}, {status: 500})
     }
 }

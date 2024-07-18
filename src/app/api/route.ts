@@ -14,6 +14,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         return NextResponse.json(guildData)
     } catch (error: any) {
         console.log(error)
-        return { error: error.message }
+        return NextResponse.json({error: "Error main route"})
+
     }
 }
