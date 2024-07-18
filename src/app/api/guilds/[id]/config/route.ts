@@ -16,7 +16,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         return NextResponse.json(guildData)
     } catch (error: any) {
         console.log(error)
-        return NextResponse.json({ error: error.message })
+        return NextResponse.json({ error: error.message }, {status: 500})
     }
 }
 
@@ -39,13 +39,12 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
             }
             )
 
-            return NextResponse.json({})
+            return NextResponse.json(guildData)
         }
 
         //return response.status !== 200 ? NextResponse.next() : NextResponse.redirect(new URL("/", req.url))
 
 
-        //return NextResponse.json(guildData)
     } catch (error: any) {
         console.log(error)
         return { error: error.message }
