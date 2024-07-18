@@ -30,5 +30,5 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
 
 
 export const config = {
-    matcher: ['/dashboard/:id*', '/menu'], // Matches requests to the '/protected-route' path
+    matcher: ['/dashboard/:id*', '/menu', '/api'], // Matches requests to the '/protected-route' path
 };

@@ -3,8 +3,8 @@ import { FaDiscord } from "react-icons/fa"
 
 export default function Home() {
   const handleLogin = () => {
-    const API_URL = 'http://localhost:1500'
-    window.location.href = API_URL + "/api/auth/discord"
+    const API_URL = "https://pochi-api.onrender.com"
+    window.location.href = API_URL + "/api/auth/discord/redirect"
   }
 
   return (

@@ -9,20 +9,19 @@ import { FormData } from "@/app/dashboard/[id]/page";
 
 
 export const fetchMutualGuilds = async () => {
-  const headersObject = await validateCookies();
-
-
-
-  if (!headersObject) {
+  const headers = await validateCookies();
+  if (!headers) {
     return { guilds: [] }; // Return an empty list if cookie validation fails
   }
 
 
 
-
   try {
+
+    //const {data: guilds } = await axios.get(`/api/guilds`, headers)
+
     const { data: guilds } = await axios.get(`${process.env.API_URL}/api/guilds/`, {
-      headers: headersObject,
+      headers: headers,
     })
 
     return { guilds }
@@ -69,7 +68,7 @@ export const fetchGuildChannels = async (id: string) => {
     return [];
   }
   try {
-    const { data: guilds } = await axios.get(`${process.env.API_URL}/api/guilds/${id}/channels`,
+    const { data: guilds } = await axios.get(`/api/guilds/${id}/channels`,
       {
         headers: headers
       }
