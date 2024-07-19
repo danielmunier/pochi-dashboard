@@ -8,7 +8,8 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         const authorization = headers().get('Cookie')
 
         const { data: guildData } = await axios(`${process.env.API_URL}/api/guilds/${id}/channels`, {
-            headers: { authorization }
+            headers: { authorization },
+            withCredentials: true
         })
 
         return NextResponse.json(guildData)

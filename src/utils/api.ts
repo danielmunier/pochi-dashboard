@@ -22,6 +22,7 @@ export const fetchMutualGuilds = async () => {
 
     const { data: guilds } = await axios.get(`${process.env.API_URL}/api/guilds/`, {
       headers: headers,
+      withCredentials: true
     })
 
     return { guilds }
@@ -35,6 +36,7 @@ export const fetchValidGuild = async (id: string, headers: HeadersInit) => {
   try {
     const response = await fetch(`${process.env.API_URL}/guilds/${id}/permissions`, {
       headers,
+      credentials: "include"
     });
     return response;
   } catch (error: any) {
