@@ -7,7 +7,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
     try {
         console.log("Tentativa de redirecionamento para a rota")
-        return NextResponse.redirect(`${process.env.API_URL}/api/auth/discord/redirect`);
+       const response = NextResponse.redirect(`${process.env.API_URL}/api/auth/discord/redirect`);
+
+        return response
 
     } catch (error: any) {
         // Retorne um erro como JSON
