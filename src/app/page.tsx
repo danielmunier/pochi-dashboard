@@ -17,6 +17,7 @@ export default function Home() {
         >
           <FaDiscord size={30} />
           <Link href="/api/auth/discord">Login with Discord</Link>
+          <Link href="/menu">Menu</Link>
         </button>
       </div>
     </div>
