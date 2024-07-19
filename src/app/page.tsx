@@ -21,7 +21,7 @@ export default function Home() {
           className="flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
         >
           <FaDiscord size={30} />
-          <a href="/api/auth/discord">Login with Discord</a>
+          <Link href="https://pochi-api.onrender.com/api/auth/discord">Login with Discord</Link>
         </button>
       </div>
     </div>
