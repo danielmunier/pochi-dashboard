@@ -6,6 +6,10 @@ import { FormData } from "@/app/dashboard/[id]/page";
 import { config } from "dotenv"
 
 
+export const handleLogin = async () => {
+  return axios.get(`/api/auth/discord`)
+}
+
 
 export const fetchMutualGuilds = async () => {
   const headers = await validateCookies();
