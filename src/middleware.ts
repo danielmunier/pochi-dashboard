@@ -6,15 +6,19 @@ import { fetchValidGuild } from "./utils/api";
 
 export const validateMiddlewareCookies = (req: NextRequest) => {
     const sessionID = req.cookies.get('connect.sid')?.value;
+    console.log(sessionID)
     return sessionID ? {
         Cookie: `connect.sid=${sessionID}`
     } : false
 }
 
 export async function middleware(req: NextRequest, ev: NextFetchEvent) {
+    console.log("Middleware")
     const headers = validateMiddlewareCookies(req)
+    console.log(headers)
     if (!headers) {
-        console.log("Não autorizado")
+        console.log(headers)
+        console.log("Não autorizado Middleware")
         return new Response("Unauthorized", { status: 401 })
     }
 
@@ -22,13 +26,13 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
     const parsedUrl = new URL(url);
     const id = parsedUrl.pathname.split('/')[2];
 
-    const response = await fetchValidGuild(id, headers)
+     const response = await fetchValidGuild(id, headers)
 
-     return response.status !== 200 ? NextResponse.next()  : NextResponse.redirect(new URL("/", req.url))
+    //  return response.status !== 200 ? NextResponse.next()  : NextResponse.redirect(new URL("/", req.url))
 
 }
 
 
 export const config = {
-    matcher: ['/dashboard/:id*', '/menu', '/api'], // Matches requests to the '/protected-route' path
+    matcher: ['/dashboard/:id*', '/menu', '/api/:path*'], // Matches requests to the '/protected-route' path
 };

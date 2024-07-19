@@ -1,9 +1,11 @@
 'use client'
 import { FaDiscord } from "react-icons/fa"
+import { config } from "dotenv"
+config()
 
 export default function Home() {
   const handleLogin = () => {
-    const API_URL = "https://pochi-api.onrender.com"
+    const API_URL = 'https://pochi-api.onrender.com' || 'http://localhost:1500'
     window.location.href = API_URL + "/api/auth/discord/redirect"
   }
 
