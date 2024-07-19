@@ -7,12 +7,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     try {
        const response = NextResponse.redirect(`${process.env.API_URL}/api/auth/discord/redirect`);
 
-        return {
-            status: 302,
-            headers: {
-                Location: response.url
-            }
-        }
+        return response
 
     } catch (error: any) {
         // Retorne um erro como JSON
