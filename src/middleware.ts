@@ -21,7 +21,7 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
         console.log("Não autorizado Middleware")
         return new Response("Unauthorized", { status: 401 })
     }
-
+ 
     const url = req.url;
     const parsedUrl = new URL(url);
     const id = parsedUrl.pathname.split('/')[2];
@@ -34,5 +34,5 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
 
 
 export const config = {
-    matcher: ['/dashboard/:id*', '/menu', '/api/:path*'], // Matches requests to the '/protected-route' path
+    matcher: ['/dashboard/:id*', '/menu'], // Matches requests to the '/protected-route' path
 };

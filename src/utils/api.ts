@@ -3,8 +3,7 @@ import axios from "axios";
 import { Guild } from "./types";
 import { validateCookies } from "./helper";
 import { FormData } from "@/app/dashboard/[id]/page";
-
-
+import { config } from "dotenv"
 
 
 
