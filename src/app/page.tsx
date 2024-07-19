@@ -4,12 +4,7 @@ import { useEffect } from "react"
 import { FaDiscord } from "react-icons/fa"
 
 export default function Home() {
-  useEffect(() => {
-    ;(async () => {
-      const resp = await fetch('/api/auth/discord')
-      console.log(resp.redirected ? resp.url : 'Not redirected')
-    })()
-  }, [])
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
