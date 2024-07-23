@@ -1,10 +1,9 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthConfig } from "next-auth"
 import prismadb from '@/lib/prismadb'
 import Discord from "next-auth/providers/discord"
-import { Console } from "console"
 
-export const authOptions = {
+export const authOptions: NextAuthConfig = {
   providers: [
     Discord({
       clientId: process.env.DISCORD_CLIENT_ID!,
