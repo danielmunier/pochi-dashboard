@@ -1,4 +1,3 @@
-import { authOptions } from "@/auth";
 
 interface PrivateLayoutProps {
     children: React.ReactNode;
