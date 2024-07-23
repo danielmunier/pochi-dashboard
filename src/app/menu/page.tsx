@@ -1,7 +1,7 @@
 
 import { fetchMutualGuilds, getUserAdminGuilds } from "@/utils/api";
 import { Guild } from "@/utils/types";
-import { GuildMenuItem } from "@/components/guilds/GuildMenuItem";
+import { GuildMenuItem } from "@/app/components/guilds/GuildMenuItem";
 import { auth } from "@/auth";
 import { getToken } from "next-auth/jwt";
 

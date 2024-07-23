@@ -1,7 +1,7 @@
 
 import { getBotGuilds } from "../../../utils/api";
 import { auth } from "@/auth";
-import { GuildMenuItem} from "../../../components/guilds/GuildMenuItem"
+import { GuildMenuItem} from "../../components/guilds/GuildMenuItem"
 
 export default async function AdminPage() {
   const session = await auth()
