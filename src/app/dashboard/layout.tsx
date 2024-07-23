@@ -2,7 +2,6 @@
 import { Sidebar } from "@/components/misc/Sidebar";
 import Header from "@/components/misc/Header";
 import React, { useContext } from "react";
-import { GuildContext } from "../context/GuildContext";
 import { Metadata } from "next";
 
 
