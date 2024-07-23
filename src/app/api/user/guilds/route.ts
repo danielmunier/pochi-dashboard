@@ -15,9 +15,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
             }
         })
    
-        const adminUserGuilds = guildData.filter(
-            guild => (guild.permissions & 0x8) === 0x8
-        )
+        const adminUserGuilds = guildData.filter((guild: any) => guild.permissions === "0x8")
         return NextResponse.json(adminUserGuilds)
     }
 
