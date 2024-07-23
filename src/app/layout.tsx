@@ -4,7 +4,7 @@ import { SessionProvider } from "next-auth/react"
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import NextAuthSessionProvider from "@/providers/sessionProvider";
-import { getServerSession } from "next-auth";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
