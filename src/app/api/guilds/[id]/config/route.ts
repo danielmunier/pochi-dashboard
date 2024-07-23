@@ -1,6 +1,6 @@
 import axios from "axios"
 import { headers } from "next/headers"
-import  prismadb  from "@/app/lib/prismadb"
+import  prismadb  from "../../../../../lib/prismadb"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }, response: NextResponse) {
