@@ -1,10 +1,7 @@
 
-import { fetchMutualGuilds, getBotGuilds, getUserAdminGuilds } from "@/utils/api";
-import { Guild } from "@/utils/types";
-import { GuildMenuItem } from "@/components/guilds/GuildMenuItem";
+import { getBotGuilds } from "../../../utils/api";
 import { auth } from "@/auth";
-import { getToken } from "next-auth/jwt";
-
+import { GuildMenuItem} from "../../../components/guilds/GuildMenuItem"
 
 export default async function AdminPage() {
   const session = await auth()
