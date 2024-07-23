@@ -4,30 +4,50 @@ import { Guild } from "./types";
 import { validateCookies } from "./helper";
 import { FormData } from "@/app/dashboard/[id]/page";
 import { config } from "dotenv"
+import { auth } from "@/auth";
 
 
 export const handleLogin = async () => {
   return axios.get(`/api/auth/discord`)
 }
 
+export const getBotGuilds = async () => {
+  try {
+    const { data: botGuilds } = await axios.get(`${process.env.API_URL}/api/guilds/`)
+    return botGuilds.guilds
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-export const fetchMutualGuilds = async () => {
-  const headers = await validateCookies();
-  if (!headers) {
-    return { guilds: [] }; // Return an empty list if cookie validation fails
+export const getUserAdminGuilds = async () => {
+  try {
+    const session = await auth()
+    if (!session || !session.accessToken) {
+      console.log(session)
+      throw new Error("No access token empty or no session found");
+    }
+
+
+    const { data: userGuilds } = await axios.get(`${process.env.API_URL}/api/user/guilds/`, {
+      headers: {
+        Authorization: `${session.accessToken}`,
+      },
+    })
+    return userGuilds
+  } catch (error) {
+    console.log(error)
+    return { message: "Erro ao consultar guildas dos usuários" }
   }
 
+}
+
+export const fetchMutualGuilds = async () => {
 
 
   try {
 
-    //const {data: guilds } = await axios.get(`/api/guilds`, headers)
-
-    const { data: guilds } = await axios.get(`${process.env.API_URL}/api/guilds/`, {
-      headers: headers,
-      withCredentials: true
-    })
-
+    const { data: guilds } = await axios.get(`http://localhost:3000/api/user/guilds/`)
     return { guilds }
   } catch (e) {
     console.error(e);
@@ -67,16 +87,11 @@ export const fetchGuild = async (id: string): Promise<Guild | any> => {
   }
 };
 
-export const fetchGuildChannels = async (id: string) => {
-  const headers = await validateCookies();
-  if (!headers) {
-    return [];
-  }
+export const getGuildChannels = async (id: string) => {
+
   try {
     const { data: guilds } = await axios.get(`/api/guilds/${id}/channels`,
-      {
-        headers: headers
-      }
+
 
     );
 
@@ -99,7 +114,7 @@ export const fetchTicketConfig = async (id: string) => {
 
 }
 
-export const fetchGuildConfig = async (id: string) => {
+export const getGuildConfig = async (id: string) => {
 
   try {
     const { data: guildDataConfig } = await axios.get(`/api/guilds/${id}/config`)
@@ -117,6 +132,7 @@ export const fetchGuildConfig = async (id: string) => {
 
 export const updateGuildConfig = async (formData: FormData) => {
   try {
+
     return axios.post(`/api/guilds/${formData.guildId}/config`, formData)
 
 
@@ -130,11 +146,11 @@ export const updateGuildConfig = async (formData: FormData) => {
 
 export const getGuildRoles = async (id: string) => {
   try {
-    const {data: roles} = await axios.get(`/api/guilds/${id}/roles`)
+    const { data: roles } = await axios.get(`/api/guilds/${id}/roles`)
     return roles
-    
+
   } catch (error) {
     console.log(error)
-    
+
   }
 }

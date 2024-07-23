@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react"
+
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import { GuildProvider } from "./context/GuildContext";
+import NextAuthSessionProvider from "@/providers/sessionProvider";
+import { getServerSession } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,18 +13,22 @@ export const metadata: Metadata = {
   description: "Dashboard of Pochi Bot",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+
   return (
+
     <html lang="en">
+
       <body className={inter.className}>
-        <GuildProvider>
           {children}
-        </GuildProvider>
+
       </body>
     </html>
+
   );
 }

@@ -1,16 +1,13 @@
 "use client";
 
-import { fetchGuildChannels, fetchGuildConfig, getGuildRoles, updateGuildConfig } from "@/utils/api";
+import { getGuildChannels, getGuildConfig, getGuildRoles, updateGuildConfig } from "@/utils/api";
 import { useEffect, useState } from "react";
-import SelectInput from "@/app/components/misc/SelectInput";
+import SelectInput from "@/components/misc/SelectInput";
 
 interface Option {
   value: string;
   label: string;
 }
-
-
-
 
 export interface FormData {
   guildId: string | null;
@@ -31,7 +28,7 @@ const DashboardPage = ({ params }: { params: { id: string } }) => {
     ticketCategory: null,
     entryFormChannel: null,
     rolesMemberApproved: [],
-    rolesVerification: []
+    rolesVerification: [],
   });
 
   const handleInputChange = (
@@ -45,13 +42,13 @@ const DashboardPage = ({ params }: { params: { id: string } }) => {
   };
 
   useEffect(() => {
-    const fetchChannels = async () => {
+    const fetchGuildData = async () => {
       try {
-        const fetchedChannels = await fetchGuildChannels(id);
-        const filteredCategories = fetchedChannels.filter((channel: any) => channel.type === 4).map((category: any) => ({ value: category.id, label: category.name }));
-        const filteredChannels = fetchedChannels.filter((channel: any) => channel.type !== 4 && channel.type !== 2).map((channel: any) => ({ value: channel.id, label: channel.name }));
+        const fetchedChannels = await getGuildChannels(id);
+        const categories = fetchedChannels.filter((channel: any) => channel.type === 4).map((category: any) => ({ value: category.id, label: category.name }));
+        const channels = fetchedChannels.filter((channel: any) => channel.type !== 4 && channel.type !== 2).map((channel: any) => ({ value: channel.id, label: channel.name }));
 
-        const guildDataConfig = await fetchGuildConfig(id);
+        const guildDataConfig = await getGuildConfig(id);
         const guildRoles = await getGuildRoles(id);
         const formattedRoles = guildRoles.map((role: any) => ({ value: role.id, label: role.name }));
 
@@ -61,40 +58,49 @@ const DashboardPage = ({ params }: { params: { id: string } }) => {
         };
 
         setRoles(formattedRoles);
-        setChannels(filteredChannels);
-        setCategories(filteredCategories);
+        setChannels(channels);
+        setCategories(categories);
         setFormData({
           guildId: guildDataConfig.guildId,
-          ticketCategory: guildDataConfig.ticketCategoryId ? { value: guildDataConfig.ticketCategoryId, label: findLabelById(guildDataConfig.ticketCategoryId, filteredCategories) } : null,
-          entryFormChannel: guildDataConfig.formEntry.formChannelId ? { value: guildDataConfig.formEntry.formChannelId, label: findLabelById(guildDataConfig.formEntry.formChannelId, filteredChannels) } : null,
-          rolesVerification: guildDataConfig.formEntry.rolesVerification.map((roleId: string) => ({ value: roleId, label: findLabelById(roleId, formattedRoles) })),
-          rolesMemberApproved: guildDataConfig.formEntry.rolesMemberApproved.map((roleId: string) => ({ value: roleId, label: findLabelById(roleId, formattedRoles) }))
+          ticketCategory: guildDataConfig.ticketConfig?.ticketCategoryId
+            ? { value: guildDataConfig.ticketConfig.ticketCategoryId, label: findLabelById(guildDataConfig.ticketConfig.ticketCategoryId, categories) }
+            : null,
+          entryFormChannel: guildDataConfig.FormEntry?.formChannelId
+            ? { value: guildDataConfig.FormEntry.formChannelId, label: findLabelById(guildDataConfig.FormEntry.formChannelId, channels) }
+            : null,
+          rolesVerification: guildDataConfig.FormEntry?.rolesVerification.map((roleId: string) => ({ value: roleId, label: findLabelById(roleId, formattedRoles) })) || [],
+          rolesMemberApproved: guildDataConfig.FormEntry?.rolesMemberApproved.map((roleId: string) => ({ value: roleId, label: findLabelById(roleId, formattedRoles) })) || [],
         });
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchChannels();
+    fetchGuildData();
   }, [id]);
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const updatedData = await updateGuildConfig(formData);
-    //console.log(updatedData);
+    try {
+      const updatedData = await updateGuildConfig(formData);
+      console.log("Configuração atualizada com sucesso:", updatedData);
+    } catch (error) {
+      console.error("Erro ao atualizar configuração:", error);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="bg-gray-900 text-white p-6 md:p-12">
         <SelectInput
-          name="ticketCategoryId"
+          name="ticketCategory"
           value={formData.ticketCategory || null}
           onChange={(newValue: any) => handleInputChange(newValue, { name: 'ticketCategory' })}
           options={categories}
           label="Categoria dos tickets:"
         />
         <SelectInput
-          name="entryFormChannelId"
+          name="entryFormChannel"
           value={formData.entryFormChannel || null}
           onChange={(newValue: any) => handleInputChange(newValue, { name: 'entryFormChannel' })}
           options={channels}

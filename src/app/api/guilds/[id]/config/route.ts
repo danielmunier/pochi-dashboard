@@ -1,44 +1,66 @@
-import { fetchValidGuild } from "@/utils/api";
-import axios from "axios";
-import { headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import axios from "axios"
+import { headers } from "next/headers"
+import  prismadb  from "@/lib/prismadb"
+import { NextRequest, NextResponse } from "next/server"
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }, response: NextResponse) {
     try {
-        const { id } = params;
-        const authorization = headers().get('Cookie');
+        const { id } = params
+        const guild = await prismadb.Guild.findUnique({ 
+            where: { guildId: id },
+            include: {
+                FormEntry: true,
+                ticketConfig: true,
+                lobbyConfig: true,
+                customStatus: true,
 
-        const { data: guildData } = await axios(`${process.env.API_URL}/api/guilds/${id}/config`, {
-            headers: { authorization },
-            withCredentials: true
-        });
+            } },
+         
+           
+        
+        )
+        
 
-        return NextResponse.json(guildData, {status: 200});
-    } catch (error: any) {
-        console.log(error);
-        return NextResponse.json({ error: "Error get guild" }, { status: 500 });
+        return NextResponse.json(guild)
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({error: "Erro ao consultar canais da guilda"}, {status: 500})
     }
 }
 
+
+
+
 export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
-    try {
-        const data = await request.json();
-        const { id } = params;
-        const authorization = headers();
+  try {
+    const { id } = params;
+    const data = await request.json();
 
-        const isValidGuild = await fetchValidGuild(id, authorization);
-        if (isValidGuild) {
-            const { data: guildData } = await axios.post(`${process.env.API_URL}/api/guilds/${id}/config`, {
-                headers: { authorization },
-                data
-            });
 
-            return NextResponse.json(guildData, { status: 200 });
-        }
+    const { ticketCategory, entryFormChannel, rolesMemberApproved, rolesVerification } = data;
 
-        return NextResponse.json({ error: 'Invalid guild' }, { status: 400 });
-    } catch (error: any) {
-        console.log(error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+
+    await prismadb.Guild.update({
+      where: { guildId: id },
+      data: {
+        ticketConfig: {
+          update: {
+            ticketCategoryId: ticketCategory ? ticketCategory.value : null,
+          },
+        },
+        FormEntry: {
+          update: {
+            formChannelId: entryFormChannel ? entryFormChannel.value : null,
+            rolesMemberApproved: rolesMemberApproved ? rolesMemberApproved.map((role: { value: string }) => role.value) : [],
+            rolesVerification: rolesVerification ? rolesVerification.map((role: { value: string }) => role.value) : [],
+          },
+        },
+      },
+    });
+
+    return NextResponse.json({ message: "Configuração da guilda atualizada com sucesso" });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Erro ao atualizar a configuração da guilda" }, { status: 500 });
+  }
 }

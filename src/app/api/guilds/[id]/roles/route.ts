@@ -1,20 +1,18 @@
-import axios from "axios"
-import { headers } from "next/headers"
-import { NextRequest, NextResponse } from "next/server"
+import axios from "axios";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }, response: NextResponse) {
+export async function GET(request: NextRequest, { params }: { params: { id: string }, response: NextResponse }) {
     try {
         const { id } = params
-        const authorization = headers().get('Cookie')
-
-        const { data: guildData } = await axios(`${process.env.API_URL}/api/guilds/${id}/roles`, {
-            headers: { authorization },
-            withCredentials: true
+        const { data: roles } = await axios.get(`${process.env.DISCORD_API_URL}/guilds/${id}/roles`, {
+            headers: {
+                Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`
+            }
         })
+        return NextResponse.json(roles)
 
-        return NextResponse.json(guildData, {status: 200})
     } catch (error) {
-        console.log(error)
-        return NextResponse.json({error: "Error GET roles"}, {status: 500})
+        console.error(error)
+        NextResponse.json({error: "Erro ao consultar cargos da guilda"}, {status: 403})
     }
 }

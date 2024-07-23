@@ -1,25 +1,26 @@
 
-import { fetchMutualGuilds, getUserAdminGuilds } from "@/utils/api";
+import { fetchMutualGuilds, getBotGuilds, getUserAdminGuilds } from "@/utils/api";
 import { Guild } from "@/utils/types";
 import { GuildMenuItem } from "@/components/guilds/GuildMenuItem";
 import { auth } from "@/auth";
 import { getToken } from "next-auth/jwt";
 
 
-export default async function MenuPage() {
+export default async function AdminPage() {
   const session = await auth()
   if(!session) return <>Not Authenticated</>
-  const userGuilds = await getUserAdminGuilds();
- if(!userGuilds) return <>No Guilds</>
+  const botGuilds = await getBotGuilds();
+  console.log(botGuilds)
+ if(!getBotGuilds) return <>No Guilds</>
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Selecione o servidor</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {userGuilds.map((guild: any) => (
+        {botGuilds.map((guild: any) => (
           <div key={guild.id}>
             <GuildMenuItem guild={guild} />
-          </div>
+          </div> 
         ))}
       </div>
     </div>
