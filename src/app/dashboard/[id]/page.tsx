@@ -91,7 +91,7 @@ const DashboardPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="bg-gray-900 text-white p-6 md:p-12">
+      <div className=" text-white p-6 md:p-12">
         <SelectInput
           name="ticketCategory"
           value={formData.ticketCategory || null}

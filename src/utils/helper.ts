@@ -1,6 +1,8 @@
 // utils/helper.ts
 "use server"
 import { headers } from "next/headers";
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 export const validateCookies = async () => {
   const cookieHeader = headers().get("cookie");
@@ -17,3 +19,9 @@ export const validateCookies = async () => {
   console.log(headers())
   return headers()
 };
+
+
+
+export async function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
