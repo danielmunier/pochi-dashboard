@@ -5,6 +5,8 @@ import { FaDiscord } from 'react-icons/fa';
 import { UserNav } from './UserNav';
 import { auth, signIn } from '@/auth';
 import { SignIn } from './SignIn';
+import Image from 'next/image';
+import icon from "@/app/icon.png"
 
 export default async function Navbar() {
     const session = await auth()
@@ -12,6 +14,11 @@ export default async function Navbar() {
         <nav className="flex items-center justify-between h-[60px] px-6">
             <div className="flex items-center space-x-4 lg:space-x-6">
                 <Link href="/" className="flex items-center gap-2 font-semibold" prefetch={false}>
+                    <Image
+                    alt='Pochi Icon'
+                    width={30}
+                    src={icon}
+                    ></Image>
                     <span className="text-white">Pochi Dashboard</span>
                 </Link>
                 <Link href="/menu" className="text-sm font-medium text-white transition-colors hover:text-primary">
