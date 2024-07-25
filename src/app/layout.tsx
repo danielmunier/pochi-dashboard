@@ -15,6 +15,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Pochi Dashboard",
   description: "Dashboard of Pochi Bot",
+
+
+  
 };
 
 export default async function RootLayout({
@@ -27,9 +30,11 @@ export default async function RootLayout({
   return (
 
     <html lang="en">
+     
 
       <body className={inter.className}>
-        <ThemeProvider>
+        <ThemeProvider defaultTheme="dark" storageKey="pochi-theme">
+         
           <Navbar />
           {children}
 
