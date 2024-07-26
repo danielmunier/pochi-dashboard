@@ -10,6 +10,16 @@ export const handleLogin = async () => {
   return axios.get(`/api/auth/discord`)
 }
 
+export const addBot = async () => {
+    try {
+        const response = await axios.get(`${process.env.API_URL}/api/bot`);
+        return response;
+    } catch (error) {
+        console.log(error);
+        return { error: "Erro ao adicionar bot no servidor" };
+    }
+};
+
 export const getBotGuilds = async () => {
   try {
     const { data: botGuilds } = await axios.get(`${process.env.API_URL}/api/guilds/`)

@@ -1,14 +1,16 @@
+import { Button } from "./components/misc/Button";
 
 export default async function Home() {
-
-
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="p-8 rounded-lg shadow-lg text-center flex flex-row">
-
-        <h1 className="text-4xl font-bold text-white mb-4">Welcome to Pochi!</h1>
-
+      <div className="p-8 rounded-lg shadow-lg text-center bg-gray-1000">
+        <h1 className="text-4xl font-bold text-white mb-4">
+          Welcome to <span className="text-orange-500">Pochi</span>!
+        </h1>
+        <div className="flex flex-col items-center">
+          <Button />
+        </div>
       </div>
     </div>
-  )
+  );
 }
