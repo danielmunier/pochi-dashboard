@@ -7,6 +7,7 @@ import { auth, signIn } from '@/auth';
 import { SignIn } from './SignIn';
 import Image from 'next/image';
 import icon from "@/app/icon.png"
+import { Button } from './Button';
 
 export default async function Navbar() {
     const session = await auth()
@@ -28,6 +29,7 @@ export default async function Navbar() {
                     Sobre nós
                 </Link>
             </div>
+            
         <SignIn session={session}/>
         </nav>
     );

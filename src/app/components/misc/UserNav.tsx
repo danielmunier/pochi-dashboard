@@ -1,6 +1,5 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Avatar from "@radix-ui/react-avatar"
-import { signOut } from "next-auth/react";
 import { SignOut } from "./SignOut";
 
 

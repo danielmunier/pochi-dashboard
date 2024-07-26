@@ -6,8 +6,7 @@ import Link from 'next/link';
 
 export async function Button() {
     
-    const session = await auth()
-    if (!session) return (
+  return (
         <div>
 
             <button
