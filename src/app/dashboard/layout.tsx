@@ -6,7 +6,7 @@ import { Metadata } from "next";
 
 
 export default function DashboardLayout({ children, title, params }: any) {
- 
+
   return (
     <div className="flex h-screen">
       <div className=" text-white">

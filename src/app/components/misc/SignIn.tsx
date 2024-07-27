@@ -1,5 +1,4 @@
-"use server"
-import { auth, signIn } from '@/auth';
+import { signIn } from '@/auth';
 import { FaDiscord } from 'react-icons/fa';
 import { UserNav } from './UserNav';
 

@@ -1,9 +1,13 @@
-import { auth } from "@/auth"
+import { getBotGuilds } from "@/utils/api"
 import axios from "axios"
-import { getToken } from "next-auth/jwt"
-import { useSession } from "next-auth/react"
 import { NextRequest, NextResponse } from "next/server"
+import { Guild } from "@/utils/types" 
 
+
+function findCommonGuilds(userGuilds: Guild[], botGuilds: Guild[]): Guild[] {
+    const userGuildIds = new Set(userGuilds.map(guild => guild.id));
+    return botGuilds.filter(botGuild => userGuildIds.has(botGuild.id));
+}
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }, res: NextResponse) {
     try {
@@ -15,7 +19,13 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
             }
         })
         const adminUserGuilds = guildData.filter((guild: any) => (BigInt(guild.permissions) & BigInt(0x8)) === BigInt(0x8))
-        return NextResponse.json(adminUserGuilds)
+        const botGuilds = await getBotGuilds()
+
+
+        const commonGuilds = findCommonGuilds(adminUserGuilds, botGuilds);
+
+
+        return NextResponse.json(commonGuilds)
     }
 
     catch (error: any) {

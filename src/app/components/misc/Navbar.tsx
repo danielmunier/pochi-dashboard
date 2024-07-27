@@ -1,13 +1,9 @@
 import Link from 'next/link';
-import { Theme, Box } from '@radix-ui/themes';
-import { cn } from '@/utils/helper';
-import { FaDiscord } from 'react-icons/fa';
-import { UserNav } from './UserNav';
 import { auth, signIn } from '@/auth';
 import { SignIn } from './SignIn';
 import Image from 'next/image';
 import icon from "@/app/icon.png"
-import { Button } from './Button';
+
 
 export default async function Navbar() {
     const session = await auth()

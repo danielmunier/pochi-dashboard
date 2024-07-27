@@ -1,7 +1,4 @@
-"use client"
-import { auth, signIn } from '@/auth';
-import { FaDiscord, FaPlus } from 'react-icons/fa';
-import { addBot } from '@/utils/api';
+import {FaPlus } from 'react-icons/fa';
 import Link from 'next/link';
 
 export async function Button() {

@@ -7,7 +7,7 @@ export default async function AdminPage() {
   const session = await auth()
   if(!session) return <>Not Authenticated</>
   const botGuilds = await getBotGuilds();
-  console.log(botGuilds)
+ 
  if(!getBotGuilds) return <>No Guilds</>
 
   return (

@@ -3,7 +3,7 @@ interface ChannelProps {
     channel: {
         id: string;
         name: string;
-        // outros campos do canal, se necessário
+     
     };
 }
 

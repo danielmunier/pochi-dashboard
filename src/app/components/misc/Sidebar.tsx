@@ -30,15 +30,7 @@ export const Sidebar = () => {
 
   return (
     <div className="">
-      <div className="flex justify-center p-3">
-        {/* <Image
-          src="https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png"
-          height={90}
-          width={90}
-          alt="guild_avatar"
-          className="rounded-full "
-        /> */}
-      </div>
+    
 
       <div className="flex flex-col items-center space-y-8">
        {
