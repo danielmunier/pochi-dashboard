@@ -95,27 +95,27 @@ export const GuildForm = ({ id }: { id: string }) => {
   return (
     <form onSubmit={handleSubmit}>
       {guildTest}
-      <div className=" text-white p-6 md:p-12">
+      <div className="text-white grid grid-cols-2 gap-4">
         <SelectInput
           name="ticketCategory"
           value={formData.ticketCategory || null}
           onChange={(newValue: any) => handleInputChange(newValue, { name: 'ticketCategory' })}
           options={categories}
-          label="Categoria dos tickets:"
+          placehoolder="Categoria dos tickets"
         />
         <SelectInput
           name="entryFormChannel"
           value={formData.entryFormChannel || null}
           onChange={(newValue: any) => handleInputChange(newValue, { name: 'entryFormChannel' })}
           options={channels}
-          label="Canal de aprovação dos formulários"
+          placehoolder="Canal de aprovação dos formulários"
         />
         <SelectInput
           name="rolesMemberApproved"
           value={formData.rolesMemberApproved}
           onChange={(newValue: any) => handleInputChange(newValue, { name: 'rolesMemberApproved' })}
           options={roles}
-          label="Cargos para membros aprovados"
+          placehoolder="Cargos para membros aprovados"
           isMulti={true}
         />
         <SelectInput
@@ -123,13 +123,14 @@ export const GuildForm = ({ id }: { id: string }) => {
           value={formData.rolesVerification}
           onChange={(newValue: any) => handleInputChange(newValue, { name: 'rolesVerification' })}
           options={roles}
-          label="Cargos para verificação"
+          placehoolder="Cargos para verificação"
           isMulti={true}
         />
-        <button type="submit" className="bg-white p-2 rounded text-black">
-          Enviar
-        </button>
+
       </div>
+      <button type="submit" className="bg-white mt-2 p-2 rounded text-black w-full">
+        Enviar
+      </button>
     </form>
   )
 }

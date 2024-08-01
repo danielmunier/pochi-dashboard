@@ -11,23 +11,27 @@ interface SelectInputProps {
   value: SingleValue<Option> | MultiValue<Option> | any;
   onChange: (newValue: SingleValue<Option> | MultiValue<Option>, actionMeta: any) => void;
   options: Option[];
-  label: string;
+  placehoolder: string;
   isMulti?: boolean;
 }
 
-const SelectInput: React.FC<SelectInputProps> = ({ name, value, onChange, options, label, isMulti = false }) => {
+
+const SelectInput: React.FC<SelectInputProps> = ({ name, value, onChange, options, placehoolder: placeholder, isMulti = false }) => {
   return (
-    <div className="mb-4">
-      <label htmlFor={name} className="block text-white mb-2">
-        {label}
-      </label>
+    <div>
+      <div>
+        {placeholder}
+      </div>
+   
       <Select
         name={name}
         value={value}
         onChange={onChange}
         options={options}
         isMulti={isMulti}
+        
         className="basic-multi-select text-black"
+        placeholder={placeholder}
         classNamePrefix="select"
       />
     </div>
