@@ -1,3 +1,12 @@
+
+# Screenshots
+## Página inicial
+![Homepage](https://i.imgur.com/RiTg9xg.png)
+## Página de configuração atual
+![Configuration](https://i.imgur.com/8QmgCrx.png)
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
