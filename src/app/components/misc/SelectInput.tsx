@@ -11,12 +11,12 @@ interface SelectInputProps {
   value: SingleValue<Option> | MultiValue<Option> | any;
   onChange: (newValue: SingleValue<Option> | MultiValue<Option>, actionMeta: any) => void;
   options: Option[];
-  placehoolder: string;
+  placeholder: string;
   isMulti?: boolean;
 }
 
 
-const SelectInput: React.FC<SelectInputProps> = ({ name, value, onChange, options, placehoolder: placeholder, isMulti = false }) => {
+const SelectInput: React.FC<SelectInputProps> = ({ name, value, onChange, options, placeholder, isMulti = false }) => {
   return (
     <div>
       <div>

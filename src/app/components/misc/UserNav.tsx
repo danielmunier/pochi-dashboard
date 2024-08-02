@@ -1,10 +1,16 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Avatar from "@radix-ui/react-avatar"
 import { SignOut } from "./SignOut";
+import { auth } from "@/auth";
+import { SignIn } from "./SignIn";
 
 
-export const UserNav = async ({session}: {session: any}) => {
-   
+export const UserNav = async () => {
+    const session = await auth()
+
+    if(!session) {
+        return <SignIn/>
+    }
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>

@@ -6,7 +6,7 @@ import { Theme } from '@radix-ui/themes';
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import NextAuthSessionProvider from "@/providers/sessionProvider";
-import Navbar from "./components/misc/Navbar";
+import Navbar from "./components/misc/navbar/nav";
 import { ThemeProvider } from "@/providers/theme-provider";
 
 

@@ -1,10 +1,11 @@
-import { signIn } from '@/auth';
+import { auth, signIn } from '@/auth';
 import { FaDiscord } from 'react-icons/fa';
 import { UserNav } from './UserNav';
 
-export async function SignIn({ session }: { session: any }) {
+export async function SignIn() {
+    const session = await auth();
 
-    if (!session) return (
+  return (
         <div>
             <form action={
                 async () => {
@@ -24,7 +25,5 @@ export async function SignIn({ session }: { session: any }) {
         </div >
     );
 
-    return (
-        <UserNav session={session} />
-    )
+    
 }
