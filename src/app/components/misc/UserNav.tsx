@@ -4,8 +4,7 @@ import { SignOut } from "./SignOut";
 
 
 export const UserNav = async ({session}: {session: any}) => {
-    if (!session) return null
-
+   
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
