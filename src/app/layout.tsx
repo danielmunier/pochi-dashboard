@@ -5,6 +5,7 @@ import { Theme } from '@radix-ui/themes';
 
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
+import Icon from "@/app/icon.png"
 import NextAuthSessionProvider from "@/providers/sessionProvider";
 import Sidebar from "./components/misc/sidebar/nav";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -14,7 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Pochi",
-  description: "Dashboard of Pochi Bot",
+  description: "Olá, me chamo Pochi! Sou um bot vários propósitos e funções para o Discord. Me adicione em seu servidor!",
 
 
 
@@ -30,17 +31,20 @@ export default async function RootLayout({
   return (
 
     <html lang="en">
-    <body className={inter.className}>
-      <ThemeProvider defaultTheme="light" storageKey="pochi-theme">
-        <div className="flex h-full">
-          <Sidebar />
-          <div className="flex-grow gap-2 p-4">
-            <main>{children}</main>
+      <head>
+        <link rel="icon" href={`${Icon}`} type="image/png" />
+      </head>
+      <body className={inter.className}>
+        <ThemeProvider defaultTheme="light" storageKey="pochi-theme">
+          <div className="flex h-full">
+            <Sidebar />
+            <div className="flex-grow gap-2 p-4">
+              <main>{children}</main>
+            </div>
           </div>
-        </div>
-      </ThemeProvider>
-    </body>
-  </html>
+        </ThemeProvider>
+      </body>
+    </html>
 
   );
 }

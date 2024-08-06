@@ -16,7 +16,7 @@ const routes = [
   {
     title: "Inicio",
     to: "/",
-    icon: <FaHome />
+    icon: <FaHome/>
   }
 ];
 
