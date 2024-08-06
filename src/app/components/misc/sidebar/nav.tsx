@@ -19,19 +19,18 @@ const routes = [
     title: "Meus servidores",
     to: "/dashboard",
     icon: <MdGroups />
-
   },
 ];
 
 export default function Sidebar() {
   return (
-    <div className="flex border-b">
-      <nav className="border-r w-64 hidden sm:block">
+    <div className="flex">
+      <nav className="border-r w-64 hidden sm:flex flex-col justify-between">
         <div className="p-5">
           <Link
             className="flex items-center mb-5 gap-2"
-            href="/">
-
+            href="/"
+          >
             <Image
               alt="Pochi Logo"
               width={32}
@@ -39,11 +38,9 @@ export default function Sidebar() {
               src={Icon}
             />
             <span className="font-bold text-lg">Pochi</span>
-
           </Link>
 
           {routes.map((route) => (
-
             <Link
               key={route.to}
               href={route.to}
@@ -54,7 +51,10 @@ export default function Sidebar() {
             </Link>
           ))}
         </div>
-    
+
+        <div className="p-5">
+          <UserNav />
+        </div>
       </nav>
 
       <div className="flex-grow sm:hidden">
@@ -80,8 +80,6 @@ export default function Sidebar() {
           </DropdownMenu.Content>
         </DropdownMenu.Root>
       </div>
-
-
     </div>
   );
 }
