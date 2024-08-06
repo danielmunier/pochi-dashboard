@@ -30,7 +30,7 @@ const SelectInput: React.FC<SelectInputProps> = ({ name, value, onChange, option
         options={options}
         isMulti={isMulti}
         
-        className="basic-multi-select text-black"
+        className="basic-multi-select"
         placeholder={placeholder}
         classNamePrefix="select"
       />

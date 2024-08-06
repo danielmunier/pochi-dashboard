@@ -105,7 +105,7 @@ export const GuildForm = ({ id }: { id: string }) => {
   return (
     <form onSubmit={handleSubmit}>
       {guildTest}
-      <div className="text-white grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
         <SelectInput
           name="ticketCategory"
           value={formData.ticketCategory || null}
@@ -137,7 +137,7 @@ export const GuildForm = ({ id }: { id: string }) => {
           isMulti={true}
         />
       </div>
-      <button type="submit" className="bg-white mt-2 p-2 rounded text-black w-full">
+      <button type="submit" className="mt-4 p-2 rounded bg-orange-400">
         Enviar
       </button>
     </form>
