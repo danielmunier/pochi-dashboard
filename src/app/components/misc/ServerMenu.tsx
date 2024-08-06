@@ -7,6 +7,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import Image from "next/image";
 
 export function ServerMenu({ guilds }: { guilds: Guild[] }) {
+  console.log(guilds)
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>

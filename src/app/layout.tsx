@@ -15,6 +15,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Pochi",
   description: "Olá, me chamo Pochi! Sou um bot vários propósitos e funções para o Discord. Me adicione em seu servidor!",
+  keywords: ["Pochi", "Bot Discord", ""],
+  icons: ["https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png"],
+ 
+  
 };
 
 export default async function RootLayout({
@@ -25,17 +29,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href={`${Icon}`} type="image/png" />
-        <meta property="og:title" content="Pochi" />
-        <meta property="og:description" content="Olá, me chamo Pochi! Sou um bot vários propósitos e funções para o Discord. Me adicione em seu servidor!" />
-        <meta property="og:image" content={`${Icon}`} />
-        <meta property="og:url" content="https://pochi-dashboard.vercel.app/" />
-        <meta property="og:type" content="website" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Pochi" />
-        <meta name="twitter:description" content="Olá, me chamo Pochi! Sou um bot vários propósitos e funções para o Discord. Me adicione em seu servidor!" />
-        <meta name="twitter:image" content={`${Icon}`} />
+        <link rel="icon" href={`https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png`} type="image/png" />
       </head>
       <body className={inter.className}>
         <ThemeProvider defaultTheme="light" storageKey="pochi-theme">
