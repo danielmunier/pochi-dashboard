@@ -16,11 +16,14 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Pochi",
   description: "Olá, me chamo Pochi! Sou um bot vários propósitos e funções para o Discord. Me adicione em seu servidor!",
-  keywords: ["Pochi", "Bot Discord", ""],
+  keywords: ["Pochi", "Bot Discord", "Pochita", "Chainsaw man"],
   icons: {
     icon: "https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png"
   },
-
+  openGraph: {
+    images: "https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png",
+    
+  }
 
 };
 
