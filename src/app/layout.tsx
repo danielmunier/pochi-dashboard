@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Pochi",
   description: "Olá, me chamo Pochi! Sou um bot vários propósitos e funções para o Discord. Me adicione em seu servidor!",
   keywords: ["Pochi", "Bot Discord", ""],
-  icons: ["https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png"],
+  icons: [new URL("https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png")],
  
   
 };
