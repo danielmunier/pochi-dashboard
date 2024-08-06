@@ -1,28 +1,33 @@
 import { cn } from "@/utils/lib";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
-import Icon from "@/app/icon.png"
+import Icon from "@/app/icon.png";
 import { MdMenu } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { MdGroups } from "react-icons/md";
 
 import { UserNav } from "../UserNav";
 import Image from "next/image";
+import { getUserAdminGuilds } from "@/utils/api";
+import { auth } from "@/auth";
+import { ServerMenu } from "../ServerMenu";
 
 const routes = [
   {
     title: "Inicio",
     to: "/",
     icon: <FaHome />
-  },
-  {
-    title: "Meus servidores",
-    to: "/dashboard",
-    icon: <MdGroups />
-  },
+  }
 ];
 
-export default function Sidebar() {
+export default async function Sidebar() {
+  const session = await auth();
+  let guilds = [];
+
+  if (session) {
+    guilds = await getUserAdminGuilds();
+  }
+
   return (
     <div className="flex">
       <nav className="border-r w-64 hidden sm:flex flex-col justify-between">
@@ -50,6 +55,8 @@ export default function Sidebar() {
               {route.title}
             </Link>
           ))}
+
+          <ServerMenu guilds={guilds} />
         </div>
 
         <div className="p-5">
