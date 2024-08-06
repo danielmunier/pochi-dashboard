@@ -13,7 +13,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pochi Dashboard",
+  title: "Pochi",
   description: "Dashboard of Pochi Bot",
 
 
