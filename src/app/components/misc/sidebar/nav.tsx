@@ -17,7 +17,7 @@ const routes = [
   {
     title: "Inicio",
     to: "/",
-    icon: <FaHome/>
+    icon: <FaHome />
   }
 ];
 
@@ -33,20 +33,23 @@ export default async function Sidebar() {
     <div className="flex">
       <nav className="border-r w-64 hidden sm:flex flex-col justify-between">
         <div className="p-5">
-          <Link
-            className="flex items-center mb-5 gap-2"
-            href="/"
-          >
-            <Image
-              alt="Pochi Logo"
-              width={32}
-              height={32}
-              src={Icon}
-            />
-            <span className="font-bold text-lg">Pochi</span>
-           
-          </Link>
-     
+          <div className="flex justify-between items-center mb-5">
+            <Link
+              className="flex items-center gap-2"
+              href="/"
+            >
+              <Image
+                alt="Pochi Logo"
+                width={32}
+                height={32}
+                src={Icon}
+              />
+              <span className="font-bold text-lg">Pochi</span>
+
+            </Link>
+            <ThemeButton/>
+          </div>
+
           {routes.map((route) => (
             <Link
               key={route.to}
