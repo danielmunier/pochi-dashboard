@@ -11,6 +11,7 @@ import Image from "next/image";
 import { getUserAdminGuilds } from "@/utils/api";
 import { auth } from "@/auth";
 import { ServerMenu } from "../ServerMenu";
+import { ThemeButton } from "../ThemeButton";
 
 const routes = [
   {
@@ -43,8 +44,9 @@ export default async function Sidebar() {
               src={Icon}
             />
             <span className="font-bold text-lg">Pochi</span>
+           
           </Link>
-
+     
           {routes.map((route) => (
             <Link
               key={route.to}
@@ -61,6 +63,7 @@ export default async function Sidebar() {
 
         <div className="p-5">
           <UserNav />
+
         </div>
       </nav>
 

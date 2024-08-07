@@ -38,7 +38,7 @@ export default async function RootLayout({
         <link rel="icon" href={`https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png`} type="image/png" />
       </head>
       <body className={inter.className}>
-          <ThemeProvider defaultTheme="light" storageKey="pochi-theme">
+          <ThemeProvider defaultTheme="dark" storageKey="pochi-theme">
             <div className="flex h-full">
               <Sidebar />
               <div className="flex-grow gap-2 p-4">
