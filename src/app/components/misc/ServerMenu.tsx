@@ -8,7 +8,8 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 
 export function ServerMenu({ guilds }: { guilds: Guild[] }) {
-  const {theme} = useTheme()
+  const { theme } = useTheme();
+  
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -24,26 +25,26 @@ export function ServerMenu({ guilds }: { guilds: Guild[] }) {
         {guilds.length > 0 ? (
           guilds.map((guild: Guild) => (
             <Link
-                href={`/dashboard/${guild.id}`}
-                className="text-sm gap-2 flex hover:underline"
-              >
-            <DropdownMenu.Item key={guild.id} className="flex items-center gap-2 p-4 w-full hover:bg-gray-200">
-              <Image
-                src={guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : "/default-icon.png"}
-                alt={guild.name}
-                width={20}
-                height={20}
-                className="rounded-full"
-              />
-
-              {guild.name}
-            </DropdownMenu.Item>
-              </Link>
-      ))
-      ) : (
-      <p className="py-2 px-4 text-sm text-gray-500">Nenhum servidor encontrado</p>
+              key={guild.id} // Aqui é o local correto para a 'key'
+              href={`/dashboard/${guild.id}`}
+              className="text-sm gap-2 flex hover:underline"
+            >
+              <DropdownMenu.Item className="flex items-center gap-2 p-4 w-full hover:bg-gray-200">
+                <Image
+                  src={guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : "/default-icon.png"}
+                  alt={guild.name}
+                  width={20}
+                  height={20}
+                  className="rounded-full"
+                />
+                {guild.name}
+              </DropdownMenu.Item>
+            </Link>
+          ))
+        ) : (
+          <p className="py-2 px-4 text-sm text-gray-500">Nenhum servidor encontrado</p>
         )}
-    </DropdownMenu.Content>
-    </DropdownMenu.Root >
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
   );
 }
