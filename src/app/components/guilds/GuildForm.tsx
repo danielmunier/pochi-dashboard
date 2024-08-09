@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import SelectInput from "../misc/SelectInput";
 import { getGuildChannels, getGuildConfig, getGuildRoles, updateGuildConfig } from "@/utils/api";
 import { GuildContext } from "@/app/context/GuildContext";
@@ -52,7 +52,7 @@ export const GuildForm = ({ id }: { id: string }) => {
     }
   };
 
-  const fetchGuildData = async () => {
+  const fetchGuildData = useCallback(async () => {
     try {
       const [fetchedChannels, guildDataConfig, guildRoles] = await Promise.all([
         getGuildChannels(id),
@@ -92,11 +92,11 @@ export const GuildForm = ({ id }: { id: string }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id])
 
   useEffect(() => {
     fetchGuildData();
-  }, [id]);
+  }, [id, fetchGuildData]);
 
   if (loading) {
     return <div className="text-white">Carregando...</div>;

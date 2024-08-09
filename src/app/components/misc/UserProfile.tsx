@@ -4,6 +4,7 @@ import Image from "next/image";
 
 export function UserProfile({user}: {user: any}) {
   const {theme} = useTheme()
+  if(!user) return <></>
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,500px)_auto] gap-3 lg:gap-6">
