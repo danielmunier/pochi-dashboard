@@ -1,8 +1,5 @@
 "use client";
 
-import { getGuildChannels, getGuildConfig, getGuildRoles, updateGuildConfig } from "../../../utils/api";
-import { useEffect, useState } from "react";
-import SelectInput from "../../components/misc/SelectInput"
 import { GuildForm } from "@/app/components/guilds/GuildForm";
 
 interface Option {

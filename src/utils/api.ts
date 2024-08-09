@@ -11,13 +11,13 @@ export const handleLogin = async () => {
 }
 
 export const addBot = async () => {
-    try {
-        const response = await axios.get(`${process.env.API_URL}/api/bot`);
-        return response;
-    } catch (error) {
-        console.log(error);
-        return { error: "Erro ao adicionar bot no servidor" };
-    }
+  try {
+    const response = await axios.get(`${process.env.API_URL}/api/bot`);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return { error: "Erro ao adicionar bot no servidor" };
+  }
 };
 
 export const getBotGuilds = async () => {
@@ -26,6 +26,25 @@ export const getBotGuilds = async () => {
     return botGuilds.guilds
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const getUserData = async () => {
+  try {
+    const session = await auth()
+    if (!session || !session.accessToken) {
+      console.log(session)
+      throw new Error("No access token empty or no session found");
+    }
+
+    const { data: userData } = await axios.get(`${process.env.API_URL}/api/user/`, {
+      headers: {
+        Authorization: `${session.accessToken}`,
+      },
+    })
+    return userData
+  } catch (error) {
+
   }
 }
 

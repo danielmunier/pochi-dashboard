@@ -12,6 +12,7 @@ import { getUserAdminGuilds } from "@/utils/api";
 import { auth } from "@/auth";
 import { ServerMenu } from "../ServerMenu";
 import { ThemeButton } from "../ThemeButton";
+import { SignOut } from "../SignOut";
 
 const routes = [
   {
@@ -23,6 +24,7 @@ const routes = [
 
 export default async function Sidebar() {
   const session = await auth();
+  
   let guilds = [];
 
   if (session) {
@@ -31,8 +33,8 @@ export default async function Sidebar() {
 
   return (
     <div className="flex">
-      <nav className="border-r w-64 hidden sm:flex flex-col justify-between">
-        <div className="p-5">
+      <nav className={`bg-custom-dark-gray w-64 hidden sm:flex flex-col justify-between`}>
+        <div className="p-4">
           <div className="flex justify-between items-center mb-5">
             <Link
               className="flex items-center gap-2"
@@ -47,14 +49,14 @@ export default async function Sidebar() {
               <span className="font-bold text-lg">Pochi</span>
 
             </Link>
-            <ThemeButton/>
+            {/* <ThemeButton/> */}
           </div>
 
           {routes.map((route) => (
             <Link
               key={route.to}
               href={route.to}
-              className={cn("flex items-center gap-2 py-2 px-4 hover:bg-gray-300 rounded border-b-2")}
+              className={cn("flex items-center gap-2 p-4 hover:bg-gray-300 rounded")}
             >
               {route.icon}
               {route.title}
@@ -64,9 +66,9 @@ export default async function Sidebar() {
           <ServerMenu guilds={guilds} />
         </div>
 
-        <div className="p-5">
+        <div className="p-5 flex items-center justify-between">
           <UserNav />
-
+          <SignOut/>
         </div>
       </nav>
 

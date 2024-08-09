@@ -20,6 +20,7 @@ export const ThemeButton = () => {
     return (
         <button
         onClick={() => toggleTheme()}
+        className="hover: bg"
         >
         {
             (theme === "dark") ? <MdLightMode size={25}/>: <MdDarkMode size={25}/>

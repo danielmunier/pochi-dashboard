@@ -10,6 +10,7 @@ import Icon from "@/app/icon.png"; // Import the icon for the favicon
 import NextAuthSessionProvider from "@/providers/sessionProvider";
 import Sidebar from "./components/misc/sidebar/nav";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { useTheme } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,16 +33,17 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href={`https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f.png`} type="image/png" />
+        <link rel="icon" href={`https://cdn.discordapp.com/icons/1041140810881699860/5f5e3eafb46342d45703cb973e17934f`} type="image/png" />
       </head>
       <body className={inter.className}>
-          <ThemeProvider defaultTheme="dark" storageKey="pochi-theme">
-            <div className="flex h-full">
+          <ThemeProvider defaultTheme="light" storageKey="pochi-theme">
+            <div className="flex h-full ">
               <Sidebar />
-              <div className="flex-grow gap-2 p-4">
+              <div className={`flex-grow gap-2 p-20 `}>
                 <main>{children}</main>
               </div>
             </div>
