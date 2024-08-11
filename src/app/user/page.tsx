@@ -3,7 +3,7 @@ import { UserProfile } from "../components/misc/UserProfile";
 
 const UserPage = async () => {
   const user = await getUserData();
-  console.log(user)
+
   return (
     <UserProfile user={user}/>
   );

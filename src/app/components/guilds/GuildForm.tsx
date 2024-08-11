@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import SelectInput from "../misc/SelectInput";
 import { getGuildChannels, getGuildConfig, getGuildRoles, updateGuildConfig } from "@/utils/api";
 import { GuildContext } from "@/app/context/GuildContext";
+import { Channel, Role } from "@/utils/types";
 
 interface Option {
   value: string;
@@ -32,6 +33,7 @@ export const GuildForm = ({ id }: { id: string }) => {
   });
 
   const guildTest = useContext(GuildContext);
+  console.log(guildTest)
 
   const handleInputChange = (
     selectedOptions: Option | Option[] | null,
@@ -61,12 +63,12 @@ export const GuildForm = ({ id }: { id: string }) => {
       ]);
 
       const categories = fetchedChannels
-        .filter((channel: any) => channel.type === 4)
-        .map((category: any) => ({ value: category.id, label: category.name }));
+        .filter((channel: Channel) => channel.type === 4)
+        .map((category: Channel) => ({ value: category.id, label: category.name }));
       const channels = fetchedChannels
-        .filter((channel: any) => channel.type !== 4 && channel.type !== 2)
-        .map((channel: any) => ({ value: channel.id, label: channel.name }));
-      const formattedRoles = guildRoles.map((role: any) => ({ value: role.id, label: role.name }));
+        .filter((channel: Channel) => channel.type !== 4 && channel.type !== 2)
+        .map((channel: Channel) => ({ value: channel.id, label: channel.name }));
+      const formattedRoles = guildRoles.map((role: Role) => ({ value: role.id, label: role.name }));
 
       const findLabelById = (id: string, options: Option[]) => {
         const option = options.find(option => option.value === id);
@@ -92,7 +94,7 @@ export const GuildForm = ({ id }: { id: string }) => {
     } finally {
       setLoading(false);
     }
-  }, [id])
+  }, [id]);
 
   useEffect(() => {
     fetchGuildData();
@@ -104,38 +106,43 @@ export const GuildForm = ({ id }: { id: string }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {guildTest}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
-        <SelectInput
-          name="ticketCategory"
-          value={formData.ticketCategory || null}
-          onChange={(newValue: any) => handleInputChange(newValue, { name: 'ticketCategory' })}
-          options={categories}
-          placeholder="Categoria dos tickets"
-        />
-        <SelectInput
-          name="entryFormChannel"
-          value={formData.entryFormChannel || null}
-          onChange={(newValue: any) => handleInputChange(newValue, { name: 'entryFormChannel' })}
-          options={channels}
-          placeholder="Canal de aprovação dos formulários"
-        />
-        <SelectInput
-          name="rolesMemberApproved"
-          value={formData.rolesMemberApproved}
-          onChange={(newValue: any) => handleInputChange(newValue, { name: 'rolesMemberApproved' })}
-          options={roles}
-          placeholder="Cargos para membros aprovados"
-          isMulti={true}
-        />
-        <SelectInput
-          name="rolesVerification"
-          value={formData.rolesVerification}
-          onChange={(newValue: any) => handleInputChange(newValue, { name: 'rolesVerification' })}
-          options={roles}
-          placeholder="Cargos para verificação"
-          isMulti={true}
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="flex flex-col gap-4">
+          <SelectInput
+            name="ticketCategory"
+            value={formData.ticketCategory || null}
+            onChange={(newValue: any) => handleInputChange(newValue, { name: "ticketCategory" })}
+            options={categories}
+            placeholder="Categoria dos tickets"
+          />
+          <SelectInput
+            name="entryFormChannel"
+            value={formData.entryFormChannel || null}
+            onChange={(newValue: any) => handleInputChange(newValue, { name: "entryFormChannel" })}
+            options={channels}
+            placeholder="Canal de aprovação dos formulários"
+          />
+          <SelectInput
+            name="rolesMemberApproved"
+            value={formData.rolesMemberApproved}
+            onChange={(newValue: any) => handleInputChange(newValue, { name: "rolesMemberApproved" })}
+            options={roles}
+            placeholder="Cargos para membros aprovados"
+            isMulti={true}
+          />
+          <SelectInput
+            name="rolesVerification"
+            value={formData.rolesVerification}
+            onChange={(newValue: any) => handleInputChange(newValue, { name: "rolesVerification" })}
+            options={roles}
+            placeholder="Cargos para verificação"
+            isMulti={true}
+          />
+        </div>
+        <div className="flex flex-col gap-4">
+          {/* Future inputs here */}
+      
+        </div>
       </div>
       <button type="submit" className="mt-4 p-2 rounded bg-orange-400">
         Enviar

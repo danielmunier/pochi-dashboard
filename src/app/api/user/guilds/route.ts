@@ -23,7 +23,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
                 Authorization: `Bearer ${accessToken}`
             }
         })
-        const adminUserGuilds = guildData.filter((guild: any) => (BigInt(guild.permissions) & BigInt(0x8)) === BigInt(0x8))
+        const adminUserGuilds = guildData.filter((guild: Guild) => (BigInt(guild.permissions) & BigInt(0x8)) === BigInt(0x8))
         const botGuilds = await getBotGuilds()
 
 

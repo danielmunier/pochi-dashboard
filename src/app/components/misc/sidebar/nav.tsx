@@ -56,7 +56,7 @@ export default async function Sidebar() {
             <Link
               key={route.to}
               href={route.to}
-              className={cn("flex items-center gap-2 p-4 hover:bg-gray-300 rounded")}
+              className={cn("flex items-center gap-2 p-4 hover:bg-gray-500 rounded")}
             >
               {route.icon}
               {route.title}
@@ -68,7 +68,6 @@ export default async function Sidebar() {
 
         <div className="p-5 flex items-center justify-between">
           <UserNav />
-          <SignOut/>
         </div>
       </nav>
 

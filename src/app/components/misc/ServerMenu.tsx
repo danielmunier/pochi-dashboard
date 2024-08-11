@@ -13,7 +13,7 @@ export function ServerMenu({ guilds }: { guilds: Guild[] }) {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className="flex items-center justify-between gap-2 p-4 hover:bg-gray-300 rounded w-full">
+        <button className="flex items-center justify-between gap-2 p-4 hover:bg-gray-500 rounded w-full">
           <div className="flex items-center gap-2">
             <MdGroups />
             <span>Meus Servidores</span>
@@ -27,9 +27,9 @@ export function ServerMenu({ guilds }: { guilds: Guild[] }) {
             <Link
               key={guild.id} // Aqui é o local correto para a 'key'
               href={`/dashboard/${guild.id}`}
-              className="text-sm gap-2 flex hover:underline"
+              className="text-sm gap-2 flex"
             >
-              <DropdownMenu.Item className="flex items-center gap-2 p-4 w-full hover:bg-gray-200">
+              <DropdownMenu.Item className="flex items-center gap-2 p-4 w-full  hover:bg-gray-500 hover:no-underline	">
                 <Image
                   src={guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : "/default-icon.png"}
                   alt={guild.name}
