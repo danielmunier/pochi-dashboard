@@ -63,6 +63,15 @@ const SelectInput: React.FC<SelectInputProps> = ({ name, value, onChange, option
               color: '#000000',
             },
           }),
+          option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isSelected ? '#2563eb' : state.isFocused ? '#1f2937' : '#111827',
+            color: state.isSelected ? '#ffffff' : '#d1d5db',
+            ':active': {
+              backgroundColor: '#2563eb',
+              color: '#ffffff',
+            },
+          }),
         }}
       />
     </div>
