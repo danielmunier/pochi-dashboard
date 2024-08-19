@@ -33,7 +33,7 @@ export default async function Sidebar() {
 
   return (
     <div className="flex">
-      <nav className={`bg-custom-dark-gray w-64 hidden sm:flex flex-col justify-between`}>
+      <nav className={`bg-custom-dark-gray w-70 hidden sm:flex flex-col justify-between`}>
         <div className="p-4">
           <div className="flex justify-between items-center mb-5">
             <Link

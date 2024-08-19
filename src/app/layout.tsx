@@ -8,9 +8,10 @@ import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import Icon from "@/app/icon.png"; // Import the icon for the favicon
 import NextAuthSessionProvider from "@/providers/sessionProvider";
-import Sidebar from "./components/misc/sidebar/nav";
+import Sidebar from "./components/misc/sidebar/sidebar";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { useTheme } from "next-themes";
+import Nav from "./components/misc/nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,12 +42,8 @@ export default async function RootLayout({
       </head>
       <body className={inter.className}>
           <ThemeProvider defaultTheme="light" storageKey="pochi-theme">
-            <div className="flex h-full ">
-              <Sidebar />
-              <div className={`flex-grow gap-2 p-20 `}>
-                <main>{children}</main>
-              </div>
-            </div>
+                {children}
+             
           </ThemeProvider>
         <Analytics/>
       </body>

@@ -40,15 +40,15 @@ export const UserNav = async () => {
                 <DropdownMenu.Portal>
                     <DropdownMenu.Content className="w-50 mt-2 rounded-md shadow-lg">
                         <DropdownMenu.Label className="font-normal">
-                            <div className="flex flex-col space-y-2 rounded-sm border-2 p-4 w-40 hover:bg-gray-500">
+                            <div className="flex flex-col space-y-2 rounded-sm border-1 p-4 w-40 hover:bg-gray-500">
                                 <Link href={"/user"} className="text-sm font-medium leading-none">Perfil</Link>
-
+                                <SignOut/>
                             </div>
                         </DropdownMenu.Label>
                     </DropdownMenu.Content>
                 </DropdownMenu.Portal>
             </DropdownMenu.Root>
-            <SignOut/>
+            {/* <SignOut/> */}
 
         </>
     );

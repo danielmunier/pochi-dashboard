@@ -20,7 +20,7 @@ export const GuildMenuItem: FC<GuildMenuItemProps> = ({ guild }) => {
    
       <Link href={`/dashboard/${guild.id}`}>
         <div className="border border-b rounded-lg p-4 mb-4 cursor-pointer flex items-center space-x-4 hover:bg-gray-300 transition duration-200">
-          <Image src={iconUrl} alt={`${guild.name} icon`} className="w-14 h-14 rounded-full" />
+          <Image src={iconUrl} alt={`${guild.name} icon`} width={50} height={50} className="w-14 h-14 rounded-full" />
           <div>
             <h2 className="text-xl font-bold">{guild.name}</h2>
           </div>

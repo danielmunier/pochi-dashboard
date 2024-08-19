@@ -9,14 +9,14 @@ import { useTheme } from "next-themes";
 
 export function ServerMenu({ guilds }: { guilds: Guild[] }) {
   const { theme } = useTheme();
-  
+  console.log(guilds)
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button className="flex items-center justify-between gap-2 p-4 hover:bg-gray-500 rounded w-full">
           <div className="flex items-center gap-2">
             <MdGroups />
-            <span>Meus Servidores</span>
+            <span className="flex">Meus Servidores <span className="ml-2 text-gray-500">{guilds.length}</span></span>
           </div>
           <IoIosArrowDown size={14} />
         </button>

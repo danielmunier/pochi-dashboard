@@ -23,6 +23,7 @@ export const addBot = async () => {
 export const getBotGuilds = async () => {
   try {
     const { data: botGuilds } = await axios.get(`${process.env.API_URL}/api/guilds/`)
+    console.log(botGuilds.guilds)
     return botGuilds.guilds
   } catch (error) {
     console.log(error)
